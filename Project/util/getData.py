@@ -8,37 +8,29 @@ import pandas as pd
 
 
 
-weekdayNum=datetime.datetime.now().weekday()
-current_time = datetime.datetime.now()
-right_now=time.strftime("%H%M")
+def get_filedate():
+    weekdayNum = datetime.datetime.now().weekday()
+    current_time = datetime.datetime.now()
+    right_now = time.strftime("%H%M")
 
-
-if weekdayNum<5:
-    if right_now < '18:00':
-        if(weekdayNum==0):
-            filedate = (date.today() - timedelta(days = 3)).strftime("%d%m%y")
+    if weekdayNum < 5:
+        if right_now < '18:00':
+            if (weekdayNum == 0):
+                filedate = (date.today() - timedelta(days=3)).strftime("%d%m%y")
+            else:
+                filedate = (date.today() - timedelta(days=1)).strftime("%d%m%y")
         else:
-            filedate = (date.today() - timedelta(days = 1)).strftime("%d%m%y")
+            print("AFTER 6 PM ")
+            filedate = date.today().strftime("%d%m%y")
+            print(filedate)
     else:
-        print("AFTER 6 PM ")
-        filedate = date.today().strftime("%d%m%y")
-        print(filedate)
-else:
-    print("WEEKENDS")
-    filedate = (date.today() - timedelta(days = weekdayNum-4)).strftime("%d%m%y")
+        print("WEEKENDS")
+        filedate = (date.today() - timedelta(days=weekdayNum - 4)).strftime("%d%m%y")
+
+    return filedate
 
 
 
-link = f"https://www.bseindia.com/download/BhavCopy/Equity/EQ{filedate}_CSV.ZIP"
-
-header = {
-    'Accept-Encoding': 'gzip, deflate, sdch, br',
-    'Accept-Language': 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
-    'Host': 'www.bseindia.com',
-    'Referer': 'https://www.bseindia.com/',
-    'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36',
-    'X-Requested-With': 'XMLHttpRequest'
-}
 
 
 def download_file(link, file_name, length):
@@ -52,9 +44,7 @@ def download_file(link, file_name, length):
         print('File cannot be downloaded:', e)
 
         
-file_name = 'EQ'+filedate+'_CSV.ZIP'
-length = 2048
-download_file(link, file_name, length)
+
 
 
 """create directory and move zip file there and unzip there."""
@@ -86,9 +76,29 @@ def move_and_unzip(file_name):
     df=pd.read_csv(csv_file_name)
     df.to_csv('input.csv', index_label=None, header=False)
 
-move_and_unzip(file_name)
 
 
+if __name__ == "__main__":
+
+    ##creating dynamic filedate based on business days
+    filedate = get_filedate()
+    link = f"https://www.bseindia.com/download/BhavCopy/Equity/EQ{filedate}_CSV.ZIP"
+
+    ##downloding file from site
+    header = {
+        'Accept-Encoding': 'gzip, deflate, sdch, br',
+        'Accept-Language': 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
+        'Host': 'www.bseindia.com',
+        'Referer': 'https://www.bseindia.com/',
+        'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest'
+    }
 
 
+    file_name = 'EQ' + filedate + '_CSV.ZIP'
+    length = 2048
+    download_file(link, file_name, length)
+
+    ##basic operations
+    move_and_unzip(file_name)
 
