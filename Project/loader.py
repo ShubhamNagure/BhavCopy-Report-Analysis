@@ -10,7 +10,6 @@ django.setup()
 from MainApp.models import BhavcopyRec
 
 
-
 def main():
     filedate = get_filedate()
     filename= 'input.csv'
@@ -29,4 +28,5 @@ def main():
                 sc_close=column[8],
             )
 
-main()
+if __name__ =='__main__':
+    main()
