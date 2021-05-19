@@ -7,7 +7,7 @@ from zipfile import ZipFile
 import pandas as pd
 
 
-
+# flag_download_file
 def get_filedate():
     weekdayNum = datetime.datetime.now().weekday()
     current_time = datetime.datetime.now()
@@ -34,22 +34,35 @@ def get_filedate():
 
 
 def download_file(link, file_name, length):
+
+    ##downloding file from site
+    header = {
+        'Accept-Encoding': 'gzip, deflate, sdch, br',
+        'Accept-Language': 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
+        'Host': 'www.bseindia.com',
+        'Referer': 'https://www.bseindia.com/',
+        'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest'
+    }
+
     try:
         req = Request(link, headers=header)
         with open(file_name, 'wb') as writer:
             request = urlopen(req, timeout=3)
             shutil.copyfileobj(request, writer, length)
             print('File downloaded with success!')
+            flag_download_file=True
     except Exception as e:
         print('File cannot be downloaded:', e)
-
+    return flag_download_file
         
 
 
 
 """create directory and move zip file there and unzip there."""
 
-def move_and_unzip(file_name):
+def move_and_unzip(file_name,filedate):
+
     #create folder with file date
     directory = f"{filedate}"
     parent_dir = "F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/util/data/"
@@ -58,7 +71,7 @@ def move_and_unzip(file_name):
     os.mkdir(path)
 
     #move file to newly created dir
-    source_dir = 'F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/util/'
+    source_dir = 'F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/'
     target_dir = f'F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/util/data/{filedate}'
     shutil.move(os.path.join(source_dir, file_name), target_dir)
 
@@ -76,29 +89,34 @@ def move_and_unzip(file_name):
     df=pd.read_csv(csv_file_name)
     df.to_csv('input.csv', index_label=None, header=False)
 
+    ldir=os.listdir()
+    for f in ldir:
+         if f=='input.csv':
+             flag_move_and_unzip = True
+    print("File moved and unzipped",flag_move_and_unzip)
+    return flag_move_and_unzip
 
-
-if __name__ == "__main__":
-
+def handle_getDate():
     ##creating dynamic filedate based on business days
     filedate = get_filedate()
     link = f"https://www.bseindia.com/download/BhavCopy/Equity/EQ{filedate}_CSV.ZIP"
 
-    ##downloding file from site
-    header = {
-        'Accept-Encoding': 'gzip, deflate, sdch, br',
-        'Accept-Language': 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
-        'Host': 'www.bseindia.com',
-        'Referer': 'https://www.bseindia.com/',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36',
-        'X-Requested-With': 'XMLHttpRequest'
-    }
-
-
     file_name = 'EQ' + filedate + '_CSV.ZIP'
     length = 2048
-    download_file(link, file_name, length)
+
+    #DOWNLOAD- file logic
+    flag_download_file=download_file(link, file_name, length)
 
     ##basic operations
-    move_and_unzip(file_name)
+    flag_move_and_unzip= move_and_unzip(file_name,filedate)
+
+    if flag_download_file & flag_move_and_unzip:
+        return True
+    return False
+
+
+
+if __name__ == "__main__":
+    handle_getDate()
+
 

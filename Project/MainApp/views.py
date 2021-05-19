@@ -34,5 +34,5 @@ def home(request):
             rec = get_bhavcopy_rec()
 
     context = {'rec': rec}
-    return render(request, 'index.html', context)
+    return render(request, 'test3.html', context)
 
