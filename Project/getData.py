@@ -65,14 +65,17 @@ def move_and_unzip(file_name,filedate):
 
     #create folder with file date
     directory = f"{filedate}"
-    parent_dir = "F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/util/data/"
+    # parent_dir = "F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/util/data/"
+    parent_dir = "C:/Users/shubh/Projekt/Project/util/data/"
+
 
     path = os.path.join(parent_dir, directory)
     os.mkdir(path)
 
     #move file to newly created dir
-    source_dir = 'F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/'
-    target_dir = f'F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/util/data/{filedate}'
+    # source_dir = 'F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/'
+    source_dir = 'C:/Users/shubh/Projekt/Project/'
+    target_dir = f'C:/Users/shubh/Projekt/Project/util/data/{filedate}'
     shutil.move(os.path.join(source_dir, file_name), target_dir)
 
     #change dir to unzip that file
