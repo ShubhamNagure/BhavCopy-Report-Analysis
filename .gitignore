@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 Project/util/data
+.idea/
 
 *.ZIP
 # C extensions

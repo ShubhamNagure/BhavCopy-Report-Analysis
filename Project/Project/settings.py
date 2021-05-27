@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MainApp',
-    'django_tables2',
+    # 'django_tables2',
 ]
 
 MIDDLEWARE = [
@@ -87,20 +87,18 @@ DATABASES = {
 
 
 
-CACHE_TTL = 60 * 360
-
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": "redis://192.168.99.100:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient"
         },
-        "KEY_PREFIX": "example"
+        "KEY_PREFIX": "bhavcopySITE"
     }
 }
 
-DJANGO_TABLES2_TEMPLATE = "django_tables2/semantic.html"
+# DJANGO_TABLES2_TEMPLATE = "django_tables2/semantic.html"
 
 
 

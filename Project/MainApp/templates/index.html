@@ -12,6 +12,8 @@
     <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Add this after Json-parser -->
+    <script src="https://unpkg.com/json5@^2.0.0/dist/index.min.js"></script>
     <script>
         window.Vue = Vue;
     </script>
@@ -162,50 +164,41 @@ element.style {
 </b-row>
     </div>
     <script type="text/javascript">
-        const items = [
-  {% if rec %}
-              {% for r in rec %}
-                { sc_code: {{r.sc_code}}, sc_name: "{{r.sc_name}}" , sc_open :{{r.sc_open}} ,sc_high :{{r.sc_high}} ,sc_low :{{r.sc_low}}  ,sc_close :{{r.sc_close}}   },
-              {% endfor %}
-  {% else %}
-                <p class="text-center"> No Records Found.. Please Check the name</p>
-  {% endif %}
-
-
-];
+        const items = JSON.parse('{{ jsonObj | safe }}');
+        console.log(items.length)
         var app = new Vue({
             delimiters: ["[[", "]]"],
             el: '#sn',
             data: {
                 items: items,
                 fields: [{
-                    key: 'sc_name',
+                    key: 'SC_NAME',
                     label: 'NAME',
                     sortable: true,
                     sortDirection: 'asc',
                     'class': 'text-left'
                 }, {
-                    key: 'sc_code',
+                    key: 'SC_CODE',
                     label: 'CODE',
                     sortable: true,
                     'class': 'text-left'
                 }, {
-                    key: 'sc_open',
+                    key: 'OPEN',
                     label: 'OPEN',
                     sortable: true,
                     'class': 'text-left'
                 }, {
-                    key: 'sc_high',
+                    key: 'HIGH',
                     label: 'HIGH',
                     sortable: true,
                     'class': 'text-left'
                 }, {
-                    key: 'sc_low',
+                    key: 'LOW',
                     label: 'LOW',
                     sortable: true,
                     'class': 'text-left'
                 }, {
-                    key: 'sc_close',
+                    key: 'CLOSE',
                     label: 'CLOSE',
                     sortable: true,
                     'class': 'text-left'
@@ -281,10 +274,6 @@ function download_as_csv(table_id, separator = ',') {
     link.click();
     document.body.removeChild(link);
 }
-
-
-
-
     </script>
     </div>
 </body>

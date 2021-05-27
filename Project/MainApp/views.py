@@ -1,38 +1,57 @@
 from django.shortcuts import render
 
 from .models import *
-from django.conf import settings
-from django.contrib import messages
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
-from django.views.decorators.cache import cache_page
-from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
 
+import redis ,json
+
+r = redis.Redis(
+host='192.168.99.100',
+port='6379')
 
 
-CACHE_TTL = getattr(settings ,'CACHE_TTL' , DEFAULT_TIMEOUT)
-
-def get_bhavcopy_rec(filter_rec = None):
-    if filter_rec:
-        print("DATA COMING FROM DB")
-        rec = BhavcopyRec.objects.filter(sc_name__contains = filter_rec)
-    else:
-        rec = BhavcopyRec.objects.all()
-    return rec
-
-
-def home(request):
+def redisDBandCache(request):
     filter_rec = request.GET.get('stock')
-    if cache.get(filter_rec):
-        print("DATA COMING FROM CACHE")
-        rec = cache.get(filter_rec)
-    else:
-        if filter_rec:
-            rec = get_bhavcopy_rec(filter_rec)
-            cache.set(filter_rec, rec)
+ 
+    if filter_rec is not None:
+        uperc=filter_rec.upper()
+        if cache.get(uperc):
+            # uperc=filter_rec.upper()
+            jsonObj = cache.get(uperc)
+            # print(newlist)
+            print("DATA COMING FROM CACHE")
         else:
-            rec = get_bhavcopy_rec()
+            # uperc=filter_rec.upper()
+            req_str = f'bhavcopy:{uperc}*'
+            mylist= []
+            for key in r.scan_iter(req_str):
+                mylist.append(key.decode('utf-8'))
+            mylistdeteils = []
+            for l in mylist:
+                mylistdeteils.append(r.hgetall(l))
+            finallist=[]
+            for x in mylistdeteils:
+                finallist.append({k.decode('utf-8').strip(): v.decode('utf-8').strip() for k ,v in x.items()})
 
-    context = {'rec': rec}
-    return render(request, 'test3.html', context)
+            newlist = sorted(finallist, key=lambda k: k['SC_CODE']) 
+            jsonObj= json.dumps(newlist,separators=(',', ':')).replace("'", r"\'")
+            cache.set(uperc, jsonObj,timeout=500)
+            print("DATA COMING FROM DB")
+    else:
+        print("All data load on startup")
+        myallkeys = []
+        for k in r.keys():
+            myallkeys.append(k)
 
+        myallvalues =[]
+        for s in myallkeys:
+            myallvalues.append(r.hgetall(s))
+
+        finalAllList =[]
+        for n in myallvalues:
+            finalAllList.append({k.decode('utf-8').strip(): v.decode('utf-8').strip() for k ,v in n.items()})
+        newlist = sorted(finalAllList, key=lambda k: k['SC_CODE']) 
+        jsonObj= json.dumps(newlist,separators=(',', ':')).replace("'", r"\'")
+
+    context = {'jsonObj': jsonObj}
+    return render(request, 'index.html', context )
