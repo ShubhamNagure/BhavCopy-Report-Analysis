@@ -12,14 +12,15 @@ port='6379')
 
 def redisDBandCache(request):
     filter_rec = request.GET.get('stock')
+    uperc=filter_rec.upper()
     if filter_rec is not None:
-        if cache.get(filter_rec):
-            uperc=filter_rec.upper()
+        if cache.get(uperc):
+            # uperc=filter_rec.upper()
             jsonObj = cache.get(uperc)
             # print(newlist)
             print("DATA COMING FROM CACHE")
         else:
-            uperc=filter_rec.upper()
+            # uperc=filter_rec.upper()
             req_str = f'bhavcopy:{uperc}*'
             mylist= []
             for key in r.scan_iter(req_str):

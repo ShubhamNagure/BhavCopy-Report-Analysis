@@ -13,7 +13,8 @@ def writeOnRedis():
 
 
     filedate = get_filedate()
-    filename= 'EQ260521.csv'
+    # filename= 'EQ260521.csv'
+    filename= 'EQ' + filedate + '.csv'
     path = f'C:/Users/shubh/Projekt/Project/util/data/{filedate}'
     os.chdir(path)
     data = pd.read_csv(f'{path}/{filename}')
@@ -34,7 +35,6 @@ def writeOnRedis():
     for row in csv_reader:
         key_dict_list.append(row['SC_NAME'])
         val_dict_list.append(row)
-
 
     file_handle.close()
 
