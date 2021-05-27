@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MainApp',
-    'django_tables2',
+    # 'django_tables2',
 ]
 
 MIDDLEWARE = [
@@ -87,8 +87,6 @@ DATABASES = {
 
 
 
-CACHE_TTL = 10
-
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -100,7 +98,7 @@ CACHES = {
     }
 }
 
-DJANGO_TABLES2_TEMPLATE = "django_tables2/semantic.html"
+# DJANGO_TABLES2_TEMPLATE = "django_tables2/semantic.html"
 
 
 

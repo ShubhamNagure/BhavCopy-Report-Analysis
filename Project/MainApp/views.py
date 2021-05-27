@@ -12,8 +12,9 @@ port='6379')
 
 def redisDBandCache(request):
     filter_rec = request.GET.get('stock')
-    uperc=filter_rec.upper()
+ 
     if filter_rec is not None:
+        uperc=filter_rec.upper()
         if cache.get(uperc):
             # uperc=filter_rec.upper()
             jsonObj = cache.get(uperc)
