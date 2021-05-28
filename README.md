@@ -1,6 +1,7 @@
+![Twitter Follow](https://img.shields.io/twitter/follow/shubham_nagure?style=social)
 # BSE BHAVCOPY DAILY REPORT
 
-A report in which csv extracted and parserd to JSON and loaded on REDIS(Primary DB) and rendered by VUE.JS using DJANGO backend.
+A report in which csv extracted and parserd to JSON and loaded on REDIS(as primary DB and to Cache) and rendered by VUE.JS using DJANGO backend.
 
 ## REQUIREMENT :
 
