@@ -1,4 +1,6 @@
+[![Linkedin: Shubham Nagure](https://img.shields.io/badge/-Shubham-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/shubham-nagure/)](https://www.linkedin.com/in/shubham-nagure/)
 ![Twitter Follow](https://img.shields.io/twitter/follow/shubham_nagure?style=social)
+![](https://visitor-badge.glitch.me/badge?page_id=ShubhamNagure.ShubhamNagure)
 # BSE BHAVCOPY DAILY REPORT
 
 A report in which csv extracted and parserd to JSON and loaded on REDIS(as primary DB and to Cache) and rendered by VUE.JS using DJANGO backend.
