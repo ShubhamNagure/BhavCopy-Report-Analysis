@@ -5,6 +5,10 @@
 
 A report in which csv extracted and parserd to JSON and loaded on REDIS(as primary DB and to Cache) and rendered by VUE.JS using DJANGO backend.
 
+<p align="center">
+<img src="https://github.com/ShubhamNagure/BhavCopy-Report-Analysis/blob/main/screenshot/Demo.PNG"   />
+</p>
+
 ## REQUIREMENT :
 
 Simple Python task:
