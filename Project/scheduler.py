@@ -1,5 +1,6 @@
+#!/home/shubham/BhavCopy-Report-Analysis/DjangoREDIS/bin/python3
 import getData
-import loader
+import insertoRedis
 import os
 
 import schedule
@@ -14,21 +15,24 @@ def job():
     """ `STEP-2` : delete old and load new data """
     print(flag)
     if flag:
-        flag_loader= loader.handle_loader()
+        insertoRedis.handle_WOR()
     else:
-        print("LOADER FAILED : cannot load data")
+        print("INSERTION FAILED : cannot load data")
 
-    if flag and flag_loader:
-        print("SUCCESS: Data EXTRACTED and LOADED Successfully !!!")
-    elif not flag:
-        print("FAILURE :DOWNLOAD AND EXTRACTING FAILED")
-    elif not flag_loader:
-        print("FAILURE :LODING FAILED")
+    #if flag and flag_loader:
+    #    print("SUCCESS: Data EXTRACTED and LOADED Successfully !!!")
+    #elif not flag:
+    #    print("FAILURE :DOWNLOAD AND EXTRACTING FAILED")
+    #elif not flag_loader:
+    #    print("FAILURE :LODING FAILED")
 
 
 
-schedule.every().day.at("11:52").do(job)
-
+schedule.every().monday.at("18:15").do(job)
+schedule.every().tuesday.at("18:15").do(job)
+schedule.every().wednesday.at("18:15").do(job)
+schedule.every().thursday.at("18:15").do(job)
+schedule.every().friday.at("18:15").do(job)
 while True:
     schedule.run_pending()
     time.sleep(1)

@@ -1,3 +1,4 @@
+#!/home/shubham/BhavCopy-Report-Analysis/DjangoREDIS/bin/python3
 from urllib.request import Request, urlopen
 import shutil ,os
 import datetime ,time 
@@ -66,16 +67,18 @@ def move_and_unzip(file_name,filedate):
     #create folder with file date
     directory = f"{filedate}"
     # parent_dir = "F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/util/data/"
-    parent_dir = "C:/Users/shubh/Projekt/Project/util/data/"
-
+    #parent_dir = "C:/Users/shubh/Projekt/Project/util/data/" 
+    parent_dir = "/home/shubham/BhavCopy-Report-Analysis/Project/util/data"
 
     path = os.path.join(parent_dir, directory)
-    os.mkdir(path)
+    mode = 0o666
+    os.mkdir(path,mode)
 
     #move file to newly created dir
     # source_dir = 'F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/'
-    source_dir = 'C:/Users/shubh/Projekt/Project/'
-    target_dir = f'C:/Users/shubh/Projekt/Project/util/data/{filedate}'
+    #source_dir = 'C:/Users/shubh/Projekt/Project/' 
+    source_dir = '/home/shubham/BhavCopy-Report-Analysis/Project'
+    target_dir = f'/home/shubham/BhavCopy-Report-Analysis/Project/util/data/{filedate}'
     shutil.move(os.path.join(source_dir, file_name), target_dir)
 
     #change dir to unzip that file
@@ -88,13 +91,13 @@ def move_and_unzip(file_name,filedate):
         print('Done!')
 
     #header are removed and created input file.
-    csv_file_name ='EQ'+filedate+'.csv'
-    df=pd.read_csv(csv_file_name)
-    df.to_csv('input.csv', index_label=None, header=False)
+    csv_file_name ='EQ'+filedate+'.CSV'
+    #df=pd.read_csv(csv_file_name)
+    #df.to_csv('input.csv', index_label=None, header=False)
 
     ldir=os.listdir()
     for f in ldir:
-         if f=='input.csv':
+         if f==csv_file_name:
              flag_move_and_unzip = True
     print("File moved and unzipped",flag_move_and_unzip)
     return flag_move_and_unzip

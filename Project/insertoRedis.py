@@ -1,3 +1,4 @@
+#!/home/shubham/BhavCopy-Report-Analysis/DjangoREDIS/bin/python3
 import redis , os , pprint
 import pandas as pd  
 from getData import get_filedate
@@ -8,17 +9,19 @@ def writeOnRedis():
 
 
     r = redis.Redis(
-    host='192.168.99.100',
+    host='127.0.0.1',
     port='6379')
 
-
+    r.flushdb()
+    print('FLUSHED: previous data')
     filedate = get_filedate()
     # filename= 'EQ260521.csv'
-    filename= 'EQ' + filedate + '.csv'
-    path = f'C:/Users/shubh/Projekt/Project/util/data/{filedate}'
+    filename= 'EQ' + filedate + '.CSV'
+#    path = f'C:/Users/shubh/Projekt/Project/util/data/{filedate}' 
+    path = f'/home/shubham/BhavCopy-Report-Analysis/Project/util/data/{filedate}'
     os.chdir(path)
     data = pd.read_csv(f'{path}/{filename}')
-    print(data)
+    #print(data)
     keep_col = ['SC_CODE', 'SC_NAME', 'OPEN','HIGH','LOW','CLOSE']
     new_f = data[keep_col]
     new_f.to_csv("inputRedis.csv", index=False)
@@ -48,7 +51,7 @@ def writeOnRedis():
     name = getNameFromlist()
     data_red= {f"bhavcopy:{next(name)}":i for i in (val_dict_list)}
 
-    pprint.pprint(data_red)
+    #pprint.pprint(data_red)
 
     print("DATA well cooked , now serving to redis")
     with r.pipeline() as pipe:
@@ -56,9 +59,14 @@ def writeOnRedis():
             pipe.hmset(bhavcopy_id,bhavcopy)
         pipe.execute()
     
+    
     r.bgsave()
     print("REDIS digested all DATA")
-    print(r.hgetall("bhavcopy:VOITH PAPER "))
+    #print(r.hgetall("bhavcopy:VOITH PAPER "))
+
+def handle_WOR():
+    writeOnRedis()
+
 
 if __name__ == "__main__":
     writeOnRedis()

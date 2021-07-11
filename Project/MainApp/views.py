@@ -6,7 +6,7 @@ from django.core.cache import cache
 import redis ,json
 
 r = redis.Redis(
-host='192.168.99.100',
+host='127.0.0.1',
 port='6379')
 
 
