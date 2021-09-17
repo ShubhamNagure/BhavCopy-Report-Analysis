@@ -1,4 +1,4 @@
-#!/home/shubham/BhavCopy-Report-Analysis/DjangoREDIS/bin/python3
+#!/home/shubham/BhavCopy-Report-Analysis/Project/venv/bin/python3
 import redis , os , pprint
 import pandas as pd  
 from getData import get_filedate

@@ -1,4 +1,4 @@
-#!/home/shubham/BhavCopy-Report-Analysis/DjangoREDIS/bin/python3
+#!/home/shubham/BhavCopy-Report-Analysis/Project/venv/bin/python3
 import getData
 import insertoRedis
 import os
