@@ -1,4 +1,4 @@
-#!/home/shubham/BhavCopy-Report-Analysis/Project/venv/bin/python3
+#!/usr/bin/python3
 from urllib.request import Request, urlopen
 import shutil ,os
 import datetime ,time 
@@ -65,21 +65,22 @@ def download_file(link, file_name, length):
 def move_and_unzip(file_name,filedate):
 
     #create folder with file date
-    directory = f"{filedate}"
-    # parent_dir = "F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/util/data/"
-    #parent_dir = "C:/Users/shubh/Projekt/Project/util/data/" 
-    parent_dir = "/home/shubham/BhavCopy-Report-Analysis/Project/util/data"
+    directory = f"{filedate}" 
+    cwd=os.getcwd()
+    parent_dir = f"{cwd}/util/data"
+    print(parent_dir)
 
     path = os.path.join(parent_dir, directory)
-    mode = 0o666
+    mode = 0o777
     os.mkdir(path,mode)
 
     #move file to newly created dir
     # source_dir = 'F:/BhavCopy-Report-Analysis/BhavCopy-Report-Analysis/Project/'
     #source_dir = 'C:/Users/shubh/Projekt/Project/' 
-    source_dir = '/home/shubham/BhavCopy-Report-Analysis/Project'
-    target_dir = f'/home/shubham/BhavCopy-Report-Analysis/Project/util/data/{filedate}'
-    shutil.move(os.path.join(source_dir, file_name), target_dir)
+    source_dir = cwd+'/'
+    target_dir = f'{cwd}/util/data/{filedate}'
+    # shutil.copy(os.path.join(source_dir, file_name), target_dir)
+    shutil.copy(f"{source_dir}{file_name}", target_dir)
 
     #change dir to unzip that file
     os.chdir(target_dir)
@@ -100,6 +101,7 @@ def move_and_unzip(file_name,filedate):
          if f==csv_file_name:
              flag_move_and_unzip = True
     print("File moved and unzipped",flag_move_and_unzip)
+    os.chdir(cwd)
     return flag_move_and_unzip
 
 def handle_getDate():
