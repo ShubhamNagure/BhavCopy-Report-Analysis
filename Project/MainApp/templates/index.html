@@ -169,6 +169,7 @@ element.style {
       </div>
     <script type="text/javascript">
         const items = JSON.parse('{{ jsonObj | safe }}');
+        /* const items = JSON.parse("{{ jsonObj }}"); */
         console.log(items.length)
         var app = new Vue({
             delimiters: ["[[", "]]"],
