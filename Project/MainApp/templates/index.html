@@ -77,7 +77,13 @@ element.style {
 <body>
     <div id="sn">
         <div id="MainText">
-            <h1>BSE BHAVCOPY DAILY REPORT</h1>&nbsp;
+            <h1>BSE BHAVCOPY DAILY REPORT </h1> 
+        </div>
+        <div style="float :right;">
+            <form method="get" name="logout" action="/logout">
+                {% csrf_token %}
+                <button class="btn btn-primary"> Logout </button>
+            </form>
         </div>
         <div class="container-fluid">
             <form method="get">
@@ -87,10 +93,6 @@ element.style {
                 </div>&nbsp;
             </form>
         </div>
-
-
-
-
 
 
         <b-container fluid id="tb" >
