@@ -23,7 +23,7 @@ def writeOnRedis():
     os.chdir(path)
     data = pd.read_csv(f'{path}/{filename}')
     #print(data)
-    keep_col = ['SC_CODE', 'SC_NAME', 'OPEN','HIGH','LOW','CLOSE']
+    keep_col = ['SC_CODE', 'SC_NAME', 'OPEN','HIGH','LOW','CLOSE','PREVCLOSE','NO_TRADES','NO_OF_SHRS','NET_TURNOV']
     new_f = data[keep_col]
     new_f.to_csv("inputRedis.csv", index=False)
     print("inputRedis.csv - File created successfully")

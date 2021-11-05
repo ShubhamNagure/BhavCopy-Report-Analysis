@@ -71,7 +71,7 @@ def redisDBandCache(request):
     else:
         jsonObj=rendAllStocks()
     context = {'jsonObj': jsonObj}
-    return render(request, 'index.html', context )
+    return render(request, 'index_new.html', context )
 
 
 def registerPage(request):
@@ -99,7 +99,7 @@ def loginPage(request):
         else:
             jsonObj=rendAllStocks()
         context = {'jsonObj': jsonObj}
-        return render(request, 'index.html', context )
+        return render(request, 'index_new.html', context )
     else:
         if request.method == 'POST':
             username = request.POST.get('username')
@@ -110,7 +110,7 @@ def loginPage(request):
                 login(request, user)
                 jsonObj=rendAllStocks()
                 context = {'jsonObj': jsonObj}
-                return render(request,'index.html',context)
+                return render(request,'index_new.html',context)
             else:
                 messages.info(request, 'Username OR password is incorrect')
         context = {}
