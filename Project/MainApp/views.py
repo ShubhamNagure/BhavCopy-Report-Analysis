@@ -76,7 +76,7 @@ def redisDBandCache(request):
 
 def registerPage(request):
     if request.user.is_authenticated:
-	    return redirect('home')
+	    return render(request,'login.html')
     else:
         form = CreateUserForm()
         if request.method == 'POST':
@@ -85,7 +85,7 @@ def registerPage(request):
                 form.save()
                 user = form.cleaned_data.get('username')
                 messages.success(request, 'Account was created for ' + user)
-                return render(request, 'index.html')
+                return render(request, 'login.html')
         context = {'form':form}
         return render(request, 'register.html', context)
 
