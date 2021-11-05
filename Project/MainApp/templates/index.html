@@ -145,7 +145,7 @@ element.style {
                                           :sort-direction="sortDirection"
                                           @filtered="onFiltered"
                                           class="mt-3">
-
+                    
 
                 </b-table>
             </b-col>
@@ -178,7 +178,7 @@ element.style {
             el: '#sn',
             data: {
                 items: items,
-                fields: [{
+                fields: [ {
                     key: 'SC_NAME',
                     label: 'NAME',
                     sortable: true,
@@ -207,6 +207,26 @@ element.style {
                 }, {
                     key: 'CLOSE',
                     label: 'CLOSE',
+                    sortable: true,
+                    'class': 'text-left'
+                }, {
+                    key: 'PREVCLOSE',
+                    label: 'PREVCLOSE',
+                    sortable: true,
+                    'class': 'text-left'
+                }, {
+                    key: 'NO_TRADES',
+                    label: 'TRADES',
+                    sortable: true,
+                    'class': 'text-left'
+                }, {
+                    key: 'NO_OF_SHRS',
+                    label: 'SHARES',
+                    sortable: true,
+                    'class': 'text-left'
+                }, {
+                    key: 'NET_TURNOV',
+                    label: 'NET_TURNOVER',
                     sortable: true,
                     'class': 'text-left'
                 }],
@@ -238,6 +258,9 @@ element.style {
                                 value: f.key
                             }
                         })
+                },
+                itemsWithSno() {
+                    return this.desserts.map((d, index) => ({ ...d, sno: index + 1 }))
                 }
             },
             methods: {
