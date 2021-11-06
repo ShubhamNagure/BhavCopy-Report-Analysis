@@ -39,7 +39,8 @@
 		"ms-python.vscode-pylance",
 		"coenraads.bracket-pair-colorizer",
 		"xabikos.javascriptsnippets",
-		"ms-vscode-remote.vscode-remote-extensionpack"
+		"ms-vscode-remote.vscode-remote-extensionpack",
+		"alexcvzz.vscode-sqlite"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
