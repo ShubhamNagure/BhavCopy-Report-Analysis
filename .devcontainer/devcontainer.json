@@ -40,7 +40,8 @@
 		"coenraads.bracket-pair-colorizer",
 		"xabikos.javascriptsnippets",
 		"ms-vscode-remote.vscode-remote-extensionpack",
-		"alexcvzz.vscode-sqlite"
+		"alexcvzz.vscode-sqlite",
+		"batisteo.vscode-django"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
