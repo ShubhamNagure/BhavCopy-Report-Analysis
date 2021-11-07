@@ -10,8 +10,10 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from django.core.cache import cache
 
+from django.views.generic import TemplateView
 
 import redis ,json
+from getData import get_filedate
 
 r = redis.Redis(
 host='127.0.0.1',
@@ -120,3 +122,18 @@ def loginPage(request):
 def logoutUser(request):
 	logout(request)
 	return redirect('login')
+
+
+
+def getFilterChart(request):
+    # rdate=get_filedate()
+    rdate = '51121'
+    cpg=request.POST.get('c')
+    ntg=request.POST.get('n')
+    print('CPG IS:', cpg,'NTG IS :',ntg, 'rdate is :',rdate)
+    x=100
+    y=1000
+    qs = BhavcopyRec.objects.extra(where=[f"sc_close < {cpg} AND sc_no_of_trades >{ntg} AND report_date= {rdate}"])
+    context = {'qs':qs}
+    return render(request, 'chart.html', context)
+

@@ -13,7 +13,7 @@ class BhavcopyRec(models.Model):
     sc_no_of_trades=models.FloatField(null=True)
     sc_no_of_shares=models.FloatField(null=True)
     sc_net_turnover=models.FloatField(null=True)
-    report_date=models.IntegerField(null=True)
+    report_date=models.TextField(null=False)
 
     def __str__(self):
-        return self.sc_name
+        return "{}-{}-{}".format(self.sc_name,self.sc_close,self.sc_no_of_trades)
