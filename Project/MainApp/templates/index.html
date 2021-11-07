@@ -101,28 +101,27 @@ element.style {
                 &nbsp;
                 <div>
                       <b-card
-                        title="New Screen"
+                        title="Filters and charts"
                         tag="article"
                         style="max-width: 40rem;"
                         id="MainText"
+                        
                       >
                         <b-card-text>
                         <ul>
+                        <span> Create a chart here by applying filters: </span> 
+                        <form method="post" action="{% url 'chart' %}">
                             <li>
-                                <b>Downloads</b> the equity bhavcopy zip from the
-                                above page every day(except weekends) at 18:00 IST for the current date
-                            </li>
+                            {% csrf_token %}
+                                <span>Closing price Less than:</span>&nbsp&nbsp&nbsp&nbsp&nbsp
+                                <input v-model="cpg" name='c' placeholder="> Closing Price">                
+                            </li>&nbsp
                             <li>
-                                <b>Extracts</b> and <b>Parses</b> the CSV file in it.
+                                <span>No Of Trades Greater than:</span>
+                                <input v-model="ntg" name='n' placeholder="< No Of Trades">
                             </li>
-                            <li>
-                                <b>Writes</b> the records into <b>Redis</b> with appropriate data structures
-                                <b>(Fields: code, name, open, high, low, close).</b>
-                            </li>
-                            <li><b>Renders</b> a simple VueJS frontend with a <b>search box</b> that allows the stored
-                                entries to be searched by name and renders a table of results and optionally
-                                <b>downloads</b> the results as CSV</li>
-                            <li>The <b>search</b> can performed on the backend using <b>Redis</b></li>
+                                <button type='submit' class='btn btn-primary'> Submit</button>
+                        </form>
                         </ul>
                         </b-card-text>
 
@@ -167,7 +166,7 @@ element.style {
     </div>
     <br/><br/>
       <div class="jumbotron text-center" style="margin-bottom:0;padding: 0px;">
-         <p style="margin-bottom: 0rem;">Author: <a href="https://linkedin.com/in/shubham-nagure/" target="_blank">Shubham Nagure</a></p>
+         {% comment %} <p style="margin-bottom: 0rem;">Author: <a href="https://linkedin.com/in/shubham-nagure/" target="_blank">Shubham Nagure</a></p> {% endcomment %}
       </div>
     <script type="text/javascript">
         const items = JSON.parse('{{ jsonObj | safe }}');
@@ -183,11 +182,7 @@ element.style {
                     label: 'NAME',
                     sortable: true,
                     sortDirection: 'asc',
-                    'class': 'text-left'
-                }, {
-                    key: 'SC_CODE',
-                    label: 'CODE',
-                    sortable: true,
+                    stickyColumn:true,
                     'class': 'text-left'
                 }, {
                     key: 'OPEN',
@@ -233,7 +228,7 @@ element.style {
                 currentPage: 1,
                 perPage: 15,
                 totalRows: items.length,
-                pageOptions: [15, 30, 45, 60, 75],
+                pageOptions: [15, 80, 120, 160, 200],
                 sortBy: null,
                 sortDesc: false,
                 sortDirection: 'asc',
