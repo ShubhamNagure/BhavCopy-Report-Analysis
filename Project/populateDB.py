@@ -7,7 +7,7 @@ django.setup()
 from MainApp.models import BhavcopyRec
 import csv
 
-fileDate = get_filedate()
+fileDate = str(get_filedate())
 
 
 file_handle = open(f"util/data/041121/inputRedis.csv", "r", encoding="utf-8")
