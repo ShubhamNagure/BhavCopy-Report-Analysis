@@ -1,5 +1,5 @@
 [![Linkedin: Shubham Nagure](https://img.shields.io/badge/-Shubham-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/shubham-nagure/)](https://www.linkedin.com/in/shubham-nagure/)
-![Twitter Follow](https://img.shields.io/twitter/follow/shubham_nagure?style=social)
+![Twitter Follow](https://img.shields.io/twitter/follow/JUST_COMPILED?style=social)
 ![](https://visitor-badge.glitch.me/badge?page_id=ShubhamNagure.ShubhamNagure)
 # BSE BHAVCOPY DAILY REPORT
 
