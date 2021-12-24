@@ -135,3 +135,6 @@ dmypy.json
 
 # json files
 #*.json
+.DS_Store
+.DS_Store
+Project/db.sqlite3
