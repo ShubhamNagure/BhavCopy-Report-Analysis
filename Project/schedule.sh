@@ -30,6 +30,8 @@ else
 	./getData.py
 	echo "File downloaded now inserting to redis"
 	./insertoRedis.py
+	echo "File downloaded now inserting to SQLITE"
+	./populateDB.PY
 	flag=1
 fi
 
