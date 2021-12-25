@@ -1,17 +1,17 @@
+from django.db import models
+from django.db.models import fields
+from django.db.models.fields import Field
 from rest_framework import serializers
 
-from .models import BhavcopyRec
+from MainApp.models import BhavcopyRec
 
-class BhavcopyRecSerializer(serializers.Serializer):
+class BhavcopyRecSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=BhavcopyRec
+        fields=['sc_code','sc_name','sc_open','sc_high','sc_low','sc_close','sc_prevclose','sc_no_of_trades','sc_no_of_shares','sc_net_turnover','report_date']
 
-    sc_code = serializers.CharField(null=True)
-    sc_name = serializers.CharField(null=True)
-    sc_open = serializers.FloatField(null=True)
-    sc_high = serializers.FloatField(null=True)
-    sc_low = serializers.FloatField(null=True)
-    sc_close = serializers.FloatField(null=True)
-    sc_prevclose = serializers.FloatField(null=True)
-    sc_no_of_trades=serializers.FloatField(null=True)
-    sc_no_of_shares=serializers.FloatField(null=True)
-    sc_net_turnover=serializers.FloatField(null=True)
-    report_date=serializers.CharField(null=False)
+
+
+
+
+    
