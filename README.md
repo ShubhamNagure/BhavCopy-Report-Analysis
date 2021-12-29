@@ -6,7 +6,7 @@
 A report in which csv extracted and parserd to JSON and loaded on REDIS(as primary DB and to Cache) and rendered by VUE.JS using DJANGO backend.
 
 <p align="center">
-<img src="https://github.com/ShubhamNagure/BhavCopy-Report-Analysis/blob/main/screenshot/Demo.PNG"   />
+<img src="https://github.com/ShubhamNagure/BhavCopy-Report-Analysis/blob/main/screenshot/Screenshot 2021-12-29 at 6.40.19 PM.png"   />
 </p>
 
 ## REQUIREMENT :
