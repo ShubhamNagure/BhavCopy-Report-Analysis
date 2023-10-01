@@ -59,3 +59,7 @@ Django-Cache is used to cache the search keys on redis in order to improve the p
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+<a href="https://trackgit.com">
+<img src="https://us-central1-trackgit-analytics.cloudfunctions.net/token/ping/ln7nggnfb9cmxyqqrorl" alt="trackgit-views" />
+</a>
